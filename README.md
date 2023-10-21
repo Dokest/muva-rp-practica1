@@ -1,1 +1,1 @@
-# muva-rp-practica1
+# Reconocimiento de patrones: Practica 1
