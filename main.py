@@ -1,16 +1,38 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import pandas as pd
+import numpy as np
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def load_labels() -> pd.DataFrame:
+    df = pd.read_csv("training_data/train_label.csv")
+    df = df.rename(columns={"Unnamed: 0": "id"})
+
+    return df
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def load_training(training_path: str) -> pd.DataFrame:
+    df = pd.read_csv(training_path)
+    df = df.rename(columns={"Unnamed: 0": "id"})
+    df = df.drop(["0"], axis=1)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    return df
+
+
+training_paths = [
+    "training_data/traintab01.csv",
+    "training_data/traintab02.csv",
+    "training_data/traintab03.csv",
+    "training_data/traintab04.csv",
+    "training_data/traintab05.csv",
+    "training_data/traintab06.csv",
+    "training_data/traintab07.csv",
+    "training_data/traintab08.csv",
+]
+
+training_df: pd.DataFrame = load_labels()
+index = 0
+
+for path in training_paths:
+    training_df = training_df.merge(load_training(path), on="id", how="right", suffixes=("", "_" + str(index)))
+    index += 1
+
+print(training_df)
