@@ -42,7 +42,7 @@ for path in training_paths:
     index += 1
 
 training_labels = training_df[training_df.columns[1]].to_numpy()
-training_np: np = training_df.drop("malignant", axis=1).to_numpy()
+training_np = training_df.drop("malignant", axis=1).to_numpy()
 
 # Split training
 kf = KFold(n_splits=5)
