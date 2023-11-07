@@ -4,13 +4,16 @@ from src.transformers.PCA_Poly import transformer_pca_poly_v1, transformer_pca_p
 from src.classifiers.Knn import classifier_knn
 from src.classifiers.perceptron import classifier_perceptron
 from src.classifiers.sgd import classifier_sgd
+from src.classifiers.svm import classifier_svm
+from src.classifiers.rf import classifier_rf
+from src.classifiers.kmeans import classifier_kmeans
 
 trainer = init_trainer_for_training()
 
 # Process results
 predicted = trainer.run_bipipeline(
     transform_pipeline=transformer_pca_poly_v2(),
-    classify_pipeline=classifier_sgd(),
+    classify_pipeline=classifier_kmeans(),
 )
 
 print(trainer.calculate_scores(predicted))
