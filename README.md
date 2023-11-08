@@ -8,12 +8,12 @@
     - [ ] Square...
   - [ ] LLE (H)
 - Classifying
-  - [ ] KNN (H)
+  - [x] KNN (H)
   - [x] SVM (J)
-  - [ ] Gradient boosting (H)
+  - [x] Gradient boosting (H)
   - [x] Random forest (J)
-  - [ ] Perceptron* (H)
-  - [x] K-means (J) --> Returns error
+  - [x] Perceptron* (H)
+  - [x] K-means (J)
   - [x] Logistic regression
   - [ ] Naive Bayes (J)
 

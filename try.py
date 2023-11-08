@@ -3,7 +3,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from src.classifiers.SVM import svm_classifier
 from src.training_setup import init_trainer_for_training
 from src.classifiers.log_reg import log_reg_classifier
 from src.transformers.PCA import pca_transformer
