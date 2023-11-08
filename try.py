@@ -3,19 +3,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from src.permute import generate_param_grid
 from src.training_setup import init_trainer_for_training
 from src.classifiers.log_reg import log_reg_classifier
 from src.transformers.PCA import pca_transformer
-
-
-def generate_param_grid(transf, clfs) -> []:
-    grid = []
-
-    for tran in transf:
-        for clf in clfs:
-            grid.append(tran | clf)
-
-    return grid
 
 
 # Dummy pipeline -> No tocar

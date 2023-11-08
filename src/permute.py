@@ -15,3 +15,14 @@ def permute(transformers: [Pipeline], classifiers: [Pipeline]) -> [Pipeline]:
             ]))
 
     return pipelines
+
+
+def generate_param_grid(transf, clfs) -> []:
+    grid = []
+
+    for tran in transf:
+        for clf in clfs:
+            grid.append(tran | clf)
+
+    return grid
+

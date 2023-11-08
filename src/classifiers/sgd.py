@@ -1,6 +1,5 @@
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
 
 
 def classifier_sgd():
