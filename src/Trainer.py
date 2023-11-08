@@ -1,5 +1,3 @@
-import typing
-
 import numpy as np
 import pandas as pd
 import sklearn
@@ -32,7 +30,7 @@ class Trainer:
 
         return self
 
-    def run_pipeline(self, pipeline: Pipeline, over_data: np.ndarray | None) -> np.ndarray:
+    def run_pipeline(self, pipeline: Pipeline, over_data: np.ndarray | None = None) -> np.ndarray:
         pipeline.fit(self.X_train, self.y_train)
 
         return pipeline.predict(over_data if over_data is not None else self.X_test)
@@ -49,15 +47,19 @@ class Trainer:
         f1_score = sklearn.metrics.f1_score(self.y_test, predicted)
         precision = sklearn.metrics.precision_score(self.y_test, predicted)
         recall = sklearn.metrics.recall_score(self.y_test, predicted)
-        mse = sklearn.metrics.mean_squared_error(self.y_test, predicted)
-        roc = sklearn.metrics.roc_curve(self.y_test, predicted)
+        # mse = sklearn.metrics.mean_squared_error(self.y_test, predicted)
+        confusion_matrix = sklearn.metrics.confusion_matrix(self.y_test, predicted)
+        accuracy = sklearn.metrics.accuracy_score(self.y_test, predicted)
+        # roc = sklearn.metrics.roc_curve(self.y_test, predicted)
 
         return {
+            "accuracy": accuracy,
+            "confusion_matrix": confusion_matrix,
             "f1": f1_score,
             "precision": precision,
             "recall": recall,
-            "mse": mse,
-            "roc": roc,
+            # "mse": mse,
+            # "roc": roc,
         }
 
     @staticmethod

@@ -3,6 +3,8 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.preprocessing import StandardScaler
 
+from src.utils import stepped_values
+
 
 def transformer_pca_poly_v1():
     """
@@ -16,7 +18,7 @@ def transformer_pca_poly_v1():
     """
     preprocess = Pipeline([
         ("StandardScaler", StandardScaler()),
-        ("PCA", PCA(n_components=0.99)),
+        ("PCA", PCA(n_components=0.95)),
     ])
 
     features = FeatureUnion([
@@ -27,6 +29,12 @@ def transformer_pca_poly_v1():
         ("preprocess", preprocess),
         ("features", features),
     ])
+
+
+def pca_params():
+    return {
+        "n_components": stepped_values(0.5, 1, 0.05),
+    }
 
 
 def transformer_pca_poly_v2():

@@ -1,4 +1,3 @@
-from sklearn.decomposition import PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.preprocessing import PolynomialFeatures

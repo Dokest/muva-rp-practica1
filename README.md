@@ -9,11 +9,11 @@
   - [ ] LLE (H)
 - Classifying
   - [ ] KNN (H)
-  - [ ] SVM (J)
+  - [x] SVM (J)
   - [ ] Gradient boosting (H)
-  - [ ] Random forest (J)
+  - [x] Random forest (J)
   - [ ] Perceptron* (H)
-  - [ ] K-means (J)
+  - [x] K-means (J) --> Returns error
   - [x] Logistic regression
   - [ ] Naive Bayes (J)
 

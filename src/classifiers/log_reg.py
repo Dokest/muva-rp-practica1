@@ -1,8 +1,10 @@
 from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
 
 
-def classifier_log_reg():
-    return Pipeline([
-        ("LogisticRegression", LogisticRegression(max_iter=10000)),
-    ])
+def log_reg_classifier():
+    return {
+        "classifier": [LogisticRegression()],
+        "classifier__fit_intercept": [True, False],
+        "classifier__max_iter": [10000],
+        # "classifier__dual": [True, False],
+    }
