@@ -3,7 +3,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from src.classifiers.SVM import svm_classifier
+from src.classifiers.svm import svm_classifier
 from src.classifiers.adaboost import adaboost_classifier
 from src.classifiers.random_forest import random_forest_classifier
 from src.permute import generate_param_grid

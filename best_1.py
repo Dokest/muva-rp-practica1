@@ -18,7 +18,7 @@ predicted = trainer.run_pipeline(Pipeline([
     ("StandardScaler", StandardScaler()),
     ("MinMax", MinMaxScaler()),
     # ("PCA", PCA(n_components=0.99)),
-    ("SVM", SVC(degree=2, C=2, kernel="rbf", gamma="scale")),
+    ("SVM", SVC(degree=2, C=2, kernel="rbf", gamma="scale", random_state=1)),
 ]))
 
 print(trainer.calculate_scores(predicted))
@@ -42,4 +42,10 @@ Best Classifier: SGDClassifier(alpha=2, loss='modified_huber', n_jobs=-1, random
 Best Transformer: Pipeline(steps=[('StandardScaler', StandardScaler()),
                 ('PCA', PCA(n_components=0.99))])
 Best Classifier: SVC(C=2, degree=2, random_state=1)
+"""
+
+"""
+accuracy: 0.63
+Best Transformer: SCALER, MINMAX
+Best Classifier: SVC(C=2, degree=2, kernel="rbf", gamma="scale", random_state=1)
 """
