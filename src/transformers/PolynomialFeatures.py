@@ -23,7 +23,7 @@ def polynomial_features_with_pca_transformer():
     return {
         "transformer": [pipeline],
         "transformer__PolynomialFeatures__degree": [2, 3],
-        "transformer__PolynomialFeatures__interaction_only": [True, False],
-        "transformer__PolynomialFeatures__include_bias": [True, False],
+        "transformer__PolynomialFeatures__interaction_only": [True], # [True, False],
+        "transformer__PolynomialFeatures__include_bias": [False], # [True, False],
     }
 

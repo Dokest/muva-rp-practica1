@@ -1,6 +1,6 @@
 from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.svm import SVC
 
 from src.training_setup import init_trainer_for_training
@@ -16,8 +16,9 @@ from src.training_setup import init_trainer_for_training
 trainer = init_trainer_for_training()
 predicted = trainer.run_pipeline(Pipeline([
     ("StandardScaler", StandardScaler()),
-    ("PCA", PCA(n_components=0.99)),
-    ("SVM", SVC(degree=2)),
+    ("MinMax", MinMaxScaler()),
+    # ("PCA", PCA(n_components=0.99)),
+    ("SVM", SVC(degree=2, C=2, kernel="rbf", gamma="scale")),
 ]))
 
 print(trainer.calculate_scores(predicted))

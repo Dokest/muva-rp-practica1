@@ -13,7 +13,7 @@ def pca_transformer():
 
     return {
         "transformer": [pipeline],
-        "transformer__PCA__n_components": stepped_values(0.5, 0.99, 0.05),
-        "transformer__PCA__whiten": [True, False],
-        "transformer__PCA__svd_solver": ["auto", "full"],
+        "transformer__PCA__n_components": [0.99], # stepped_values(0.5, 0.99, 0.05),
+        "transformer__PCA__whiten": [True], # [True, False],
+        "transformer__PCA__svd_solver": ["auto"], #["auto", "full"],
     }

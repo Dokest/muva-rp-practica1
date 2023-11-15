@@ -10,10 +10,10 @@ class Trainer:
         self.X_test = None
         self.y_test = None
 
-        training_dataframes = list(map(self._load_training_file, training_paths))
+        training_dataframes = list(map(self.load_training_file, training_paths))
 
-        complete_dataframe = self._merge_datasets(self._load_labels_file(labels_path), training_dataframes)
-        complete_dataframe = self._remove_id_from_dataframe(complete_dataframe)
+        complete_dataframe = self.merge_datasets(self._load_labels_file(labels_path), training_dataframes)
+        complete_dataframe = self.remove_id_from_dataframe(complete_dataframe)
 
         self.X_train_df, self.y_train_df = self._extract_labels_from_dataframe(complete_dataframe)
 
@@ -30,7 +30,7 @@ class Trainer:
 
         return self
 
-    def run_pipeline(self, pipeline: Pipeline, over_data: np.ndarray | None = None) -> np.ndarray:
+    def fit_and_predict(self, pipeline: Pipeline, over_data: np.ndarray | None = None) -> np.ndarray:
         pipeline.fit(self.X_train, self.y_train)
 
         return pipeline.predict(over_data if over_data is not None else self.X_test)
@@ -63,7 +63,7 @@ class Trainer:
         }
 
     @staticmethod
-    def _load_training_file(training_path: str) -> pd.DataFrame:
+    def load_training_file(training_path: str) -> pd.DataFrame:
         df = pd.read_csv(training_path)
         df = df.rename(columns={"Unnamed: 0": "id"})
         df = df.drop(["0"], axis=1)
@@ -78,7 +78,7 @@ class Trainer:
         return df
 
     @staticmethod
-    def _merge_datasets(labels_dataset: pd.DataFrame, dataframes: [pd.DataFrame]) -> pd.DataFrame:
+    def merge_datasets(labels_dataset: pd.DataFrame, dataframes: [pd.DataFrame]) -> pd.DataFrame:
         index = 0
 
         result_dataframe = labels_dataset
@@ -97,5 +97,5 @@ class Trainer:
         return X_train, y_train
 
     @staticmethod
-    def _remove_id_from_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
+    def remove_id_from_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
         return dataframe.drop("id", axis=1)

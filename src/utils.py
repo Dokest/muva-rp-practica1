@@ -3,7 +3,7 @@ def stepped_values(min: float, max: float, step: float) -> [float]:
     value = min
     all_values = []
 
-    while value < min:
+    while value < max:
         all_values.append(value)
 
         value += step

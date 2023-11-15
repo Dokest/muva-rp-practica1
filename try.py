@@ -3,6 +3,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from src.classifiers.SVM import svm_classifier
+from src.classifiers.adaboost import adaboost_classifier
 from src.classifiers.random_forest import random_forest_classifier
 from src.permute import generate_param_grid
 from src.training_setup import init_trainer_for_training
@@ -19,16 +21,17 @@ pipeline = Pipeline([
 
 # Array with all the transformers available
 transformers = [
-    #pca_transformer(),
+    # pca_transformer(),
     polynomial_features_with_pca_transformer(),
     # select_k_best_transformer(), # Raises code warnings
 ]
 
 # Array with all the classifiers available
 classifiers = [
-    #log_reg_classifier(),
-    random_forest_classifier(),
-    # svm_classifier(),
+    # log_reg_classifier(),
+    # random_forest_classifier(),
+    # adaboost_classifier(),
+    svm_classifier(),
 ]
 
 param_grid = generate_param_grid(transformers, classifiers)
