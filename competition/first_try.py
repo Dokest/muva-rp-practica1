@@ -44,7 +44,7 @@ test_dataframe_complete = Trainer.remove_id_from_dataframe(test_dataframe_comple
 pipeline = Pipeline([
     ("StandardScaler", StandardScaler()),
     ("MinMax", MinMaxScaler()),
-    ("SVM", SVC(degree=2, C=2, kernel="rbf", gamma="scale", random_state=1)),
+    ("SVM", SVC(degree=2, C=5, kernel="rbf", gamma="scale", random_state=1)),
 ])
 
 predicted = trainer.fit_and_predict(pipeline, test_dataframe_complete.to_numpy())
@@ -52,5 +52,5 @@ predicted = trainer.fit_and_predict(pipeline, test_dataframe_complete.to_numpy()
 # Pasarlo a txt
 predicted_str = '\n'.join(str(x) for x in predicted)
 
-with open("./competition/Competicion1_grupo_D_hugo_jorge.txt", "w") as file:
+with open("./Competicion1_grupo_D_hugo_jorge.txt", "w") as file:
     file.write(predicted_str)

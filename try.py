@@ -12,6 +12,7 @@ from src.classifiers.log_reg import log_reg_classifier
 from src.transformers.PCA import pca_transformer
 from src.transformers.PolynomialFeatures import polynomial_features_transformer, \
     polynomial_features_with_pca_transformer
+from src.transformers.MinMax import minmax_transformer
 
 # Dummy pipeline -> No tocar
 pipeline = Pipeline([
@@ -22,8 +23,9 @@ pipeline = Pipeline([
 # Array with all the transformers available
 transformers = [
     # pca_transformer(),
-    polynomial_features_with_pca_transformer(),
+    # polynomial_features_with_pca_transformer(),
     # select_k_best_transformer(), # Raises code warnings
+    minmax_transformer()
 ]
 
 # Array with all the classifiers available
@@ -39,7 +41,7 @@ grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, scoring='a
 
 # Init training and start the prediction
 trainer = init_trainer_for_training()
-predicted = trainer.run_pipeline(grid_search)
+predicted = trainer.fit_and_predict(grid_search)
 
 # Print the scores
 print(trainer.calculate_scores(predicted))

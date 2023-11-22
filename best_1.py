@@ -51,3 +51,15 @@ accuracy: 0.63
 Best Transformer: SCALER, MINMAX
 Best Classifier: SVC(C=2, degree=2, kernel="rbf", gamma="scale", random_state=1)
 """
+"""
+{'accuracy': 0.6437389770723104, 'confusion_matrix': array([[226,  68],
+       [134, 139]], dtype=int64), 'f1': 0.5791666666666667, 'precision': 0.6714975845410628, 'recall': 0.5091575091575091}
+Best Transformer: Pipeline(steps=[('StandardScaler', StandardScaler()), ('PCA', MinMaxScaler())])
+Best Classifier: SVC(C=5, degree=2, random_state=1)
+"""
+"""
+{'accuracy': 0.63668430335097, 'confusion_matrix': array([[215,  79],
+       [127, 146]], dtype=int64), 'f1': 0.5863453815261044, 'precision': 0.6488888888888888, 'recall': 0.5347985347985348}
+Best Transformer: Pipeline(steps=[('StandardScaler', StandardScaler()), ('PCA', MinMaxScaler())])
+Best Classifier: SVC(C=8.5, degree=2, random_state=1)
+"""
