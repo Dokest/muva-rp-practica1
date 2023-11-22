@@ -1,7 +1,4 @@
 import os
-import pandas as pd
-from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.svm import SVC
@@ -37,7 +34,7 @@ test_paths = [
     os.path.join(ROOT_DIR, "test_data/testtab08.csv"),
 ]
 
-test_dataframes = list(map(Trainer.load_training_file, training_paths))
+test_dataframes = list(map(Trainer.load_training_file, test_paths))
 first_test_dataframe = test_dataframes.pop(0)
 
 test_dataframe_complete = Trainer.merge_datasets(first_test_dataframe, test_dataframes)

@@ -1,6 +1,6 @@
 from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, PolynomialFeatures
 from sklearn.svm import SVC
 
 from src.training_setup import init_trainer_for_training
@@ -14,10 +14,12 @@ from src.training_setup import init_trainer_for_training
 """
 
 trainer = init_trainer_for_training()
-predicted = trainer.run_pipeline(Pipeline([
+predicted = trainer.fit_and_predict(Pipeline([
     ("StandardScaler", StandardScaler()),
     ("MinMax", MinMaxScaler()),
-    # ("PCA", PCA(n_components=0.99)),
+    ("PCA1", PCA(n_components=0.99)),
+    ("Poly", PolynomialFeatures(degree=3)),
+    ("PCA2", PCA(n_components=0.99)),
     ("SVM", SVC(degree=2, C=2, kernel="rbf", gamma="scale", random_state=1)),
 ]))
 
