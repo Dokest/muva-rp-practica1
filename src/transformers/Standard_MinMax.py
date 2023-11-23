@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 def minmax_transformer():
     pipeline = Pipeline([
         ("StandardScaler", StandardScaler()),
-        ("PCA", MinMaxScaler()),
+        ("MinMax", MinMaxScaler()),
     ])
 
     return {

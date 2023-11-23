@@ -60,6 +60,6 @@ Best Classifier: SVC(C=5, degree=2, random_state=1)
 """
 {'accuracy': 0.63668430335097, 'confusion_matrix': array([[215,  79],
        [127, 146]], dtype=int64), 'f1': 0.5863453815261044, 'precision': 0.6488888888888888, 'recall': 0.5347985347985348}
-Best Transformer: Pipeline(steps=[('StandardScaler', StandardScaler()), ('PCA', MinMaxScaler())])
+Best Transformer: Pipeline(steps=[('StandardScaler', StandardScaler()), ('MinMax', MinMaxScaler())])
 Best Classifier: SVC(C=8.5, degree=2, random_state=1)
 """

@@ -12,7 +12,7 @@ from src.classifiers.log_reg import log_reg_classifier
 from src.transformers.PCA import pca_transformer
 from src.transformers.PolynomialFeatures import polynomial_features_transformer, \
     polynomial_features_with_pca_transformer
-from src.transformers.MinMax import minmax_transformer
+from src.transformers.Standard_MinMax import minmax_transformer
 
 # Dummy pipeline -> No tocar
 pipeline = Pipeline([
