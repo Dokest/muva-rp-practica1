@@ -1,10 +1,8 @@
-from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import GaussianNB
-
-from src.utils import stepped_values
 
 
 def bayes_classifier():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB"""
     return {
         "classifier": [GaussianNB()]
     }

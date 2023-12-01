@@ -1,7 +1,7 @@
 import os
 
 from definitions import ROOT_DIR
-from src.Trainer import Trainer
+from src.utils.Trainer import Trainer
 
 
 training_paths = [

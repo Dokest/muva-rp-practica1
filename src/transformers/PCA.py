@@ -1,11 +1,11 @@
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from src.utils import stepped_values
 from sklearn.decomposition import PCA
 
 
 def pca_transformer():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA"""
     pipeline = Pipeline([
         ("StandardScaler", StandardScaler()),
         ("PCA", PCA()),

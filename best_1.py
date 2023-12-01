@@ -3,7 +3,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, PolynomialFeatures
 from sklearn.svm import SVC
 
-from src.training_setup import init_trainer_for_training
+from src.utils.training_setup import init_trainer_for_training
 
 """
 'accuracy': 0.5961199294532628,

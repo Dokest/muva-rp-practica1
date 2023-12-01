@@ -2,10 +2,11 @@ from sklearn.decomposition import PCA
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
 
-from src.utils import stepped_values
+from src.utils.utils import stepped_values
 
 
 def polynomial_features_transformer():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html#sklearn.preprocessing.PolynomialFeatures"""
     return {
         "transformer": [PolynomialFeatures()],
         "transformer__degree": stepped_values(2, 5, 1),
