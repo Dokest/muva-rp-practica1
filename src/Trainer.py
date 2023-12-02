@@ -41,15 +41,17 @@ class Trainer:
             ("classify", classify_pipeline),
         ])
 
-        return self.run_pipeline(pipeline, over_data)
+        return self.fit_and_predict(pipeline, over_data)
 
-    def calculate_scores(self, predicted):
-        f1_score = sklearn.metrics.f1_score(self.y_test, predicted)
-        precision = sklearn.metrics.precision_score(self.y_test, predicted)
-        recall = sklearn.metrics.recall_score(self.y_test, predicted)
+    def calculate_scores(self, predicted, over=None):
+        over_data = over if over is not None else self.y_test
+
+        f1_score = sklearn.metrics.f1_score(over_data, predicted)
+        precision = sklearn.metrics.precision_score(over_data, predicted)
+        recall = sklearn.metrics.recall_score(over_data, predicted)
         # mse = sklearn.metrics.mean_squared_error(self.y_test, predicted)
-        confusion_matrix = sklearn.metrics.confusion_matrix(self.y_test, predicted)
-        accuracy = sklearn.metrics.accuracy_score(self.y_test, predicted)
+        confusion_matrix = sklearn.metrics.confusion_matrix(over_data, predicted)
+        accuracy = sklearn.metrics.accuracy_score(over_data, predicted)
         # roc = sklearn.metrics.roc_curve(self.y_test, predicted)
 
         return {

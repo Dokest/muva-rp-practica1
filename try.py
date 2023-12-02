@@ -42,9 +42,11 @@ grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, scoring='a
 # Init training and start the prediction
 trainer = init_trainer_for_training()
 predicted = trainer.fit_and_predict(grid_search)
+predicted_train = trainer.fit_and_predict(grid_search, over_data=trainer.X_train)
 
 # Print the scores
 print(trainer.calculate_scores(predicted))
+print(trainer.calculate_scores(predicted_train, trainer.y_train))
 
 # Print the best hyperparameters for the transformer and classifier
 best_transformer = grid_search.best_estimator_.named_steps['transformer']
