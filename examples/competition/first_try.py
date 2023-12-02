@@ -52,5 +52,5 @@ predicted = trainer.fit_and_predict(pipeline, test_dataframe_complete.to_numpy()
 # Pasarlo a txt
 predicted_str = '\n'.join(str(x) for x in predicted)
 
-with open("./Competicion1_grupo_D_hugo_jorge.txt", "w") as file:
+with open("Competicion1_grupo_D_hugo_jorge.txt", "w") as file:
     file.write(predicted_str)

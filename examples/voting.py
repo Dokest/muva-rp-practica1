@@ -11,12 +11,13 @@ from src.utils.training_setup import init_trainer_for_training
 # Init training and start the prediction
 trainer = init_trainer_for_training()
 
-# Hacer la clasificación
-transforms = FeatureUnion([
+# Create the transformer
+transformers = FeatureUnion([
     ("StandardScaler", StandardScaler()),
     ("MinMax", MinMaxScaler()),
 ])
 
+# Create the voting classifier with different classifiers
 clf = VotingClassifier(voting="soft", estimators=[
     ("gaussian", GaussianNB()),
     ("rf", RandomForestClassifier(n_estimators=50, random_state=1)),
@@ -25,10 +26,9 @@ clf = VotingClassifier(voting="soft", estimators=[
 ])
 
 predicted = trainer.fit_and_predict(Pipeline([
-    ("transforms", transforms),
+    ("transformers", transformers),
     ("classifiers", clf),
 ]))
 
 # Print the scores
 print(trainer.calculate_scores(predicted))
-

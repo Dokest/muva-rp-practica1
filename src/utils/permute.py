@@ -18,6 +18,9 @@ def permute(transformers: [Pipeline], classifiers: [Pipeline]) -> [Pipeline]:
 
 
 def generate_param_grid(transf, clfs) -> []:
+    """
+    Concatenates dictionaries to create all the possible permutations between them.
+    """
     grid = []
 
     for tran in transf:

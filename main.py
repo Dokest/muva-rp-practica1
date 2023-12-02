@@ -1,142 +1,74 @@
-import pandas as pd
-import numpy as np
-import sklearn
-from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import KFold
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-import matplotlib.pyplot as plt
+
+from src.classifiers.adaboost import adaboost_classifier
+from src.classifiers.svm import svm_classifier
+from src.utils.colors import color_green
+from src.utils.permute import generate_param_grid
+from src.utils.prettify_result import print_pretty_result
+from src.utils.training_setup import init_trainer_for_training
+from src.transformers.Standard_MinMax import standard_minmax_transformer
 
 
-def load_labels() -> pd.DataFrame:
-    df = pd.read_csv("training_data/train_label.csv")
-    df = df.rename(columns={"Unnamed: 0": "id"})
+"""
+This file is the training file that we have used for the most part of the training.
 
-    return df
-
-
-def load_training(training_path: str) -> pd.DataFrame:
-    df = pd.read_csv(training_path)
-    df = df.rename(columns={"Unnamed: 0": "id"})
-    df = df.drop(["0"], axis=1)
-
-    return df
+It contains all the elements necessary to:
+    - Read the training data & the test data
+    - Run a GridSearchCV over permutations of transformers & classifiers
+    - Train the GridSearchCV model
+    - Print the test results
+    - Print the training results to check for overfitting
+"""
 
 
-training_paths = [
-    "training_data/traintab01.csv",
-    "training_data/traintab02.csv",
-    "training_data/traintab03.csv",
-    "training_data/traintab04.csv",
-    "training_data/traintab05.csv",
-    "training_data/traintab06.csv",
-    "training_data/traintab07.csv",
-    "training_data/traintab08.csv",
+# Dummy pipeline -> No tocar
+pipeline = Pipeline([
+    ('transformer', StandardScaler()),
+    ('classifier', LogisticRegression()),
+])
+
+# Array with all the transformers to try
+transformers = [
+    # pca_transformer(),
+    # polynomial_features_with_pca_transformer(),
+    # select_k_best_transformer(), # Raises code warnings
+    standard_minmax_transformer(),
 ]
 
-training_df: pd.DataFrame = load_labels()
-index = 0
+# Array with all the classifiers to try
+classifiers = [
+    # log_reg_classifier(),
+    # random_forest_classifier(),
+    # adaboost_classifier(),
+    svm_classifier(C=[5], kernel=["rbf"], degree=[2], gamma=["scale"]),
+]
 
-for path in training_paths:
-    training_df = training_df.merge(load_training(path), on="id", how="right", suffixes=("", "_" + str(index)))
-    index += 1
+# Permute all combinations of transformers and classifiers
+param_grid = generate_param_grid(transformers, classifiers)
 
-training_labels = training_df[training_df.columns[1]].to_numpy()
-training_np = training_df.drop("malignant", axis=1).to_numpy()
+# Create model with permutations and k-folds
+grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, scoring="accuracy", cv=5, verbose=3)
 
-# Split training
-kf = KFold(n_splits=5)
-kf.get_n_splits(training_np)
+# Init training and start the prediction
+trainer = init_trainer_for_training()
+print(color_green(">> Init training"))
+predicted = trainer.fit_and_predict(grid_search)
 
+# Print the test scores
+print(color_green(">> Test scores"))
+print_pretty_result(trainer.calculate_scores(predicted))
 
-def everything(training, training_lbl, testing, testing_lbl, scaler, dimRed, classifier) -> []:
-    # Reduce dimension
-    scaler.fit(training)
+# Print the best hyperparameters for the transformer and classifier
+best_transformer = grid_search.best_estimator_.named_steps['transformer']
+best_classifier = grid_search.best_estimator_.named_steps['classifier']
 
-    training = scaler.transform(training)
-    testing = scaler.transform(testing)
+print("Best Transformer:", best_transformer)
+print("Best Classifier:", best_classifier)
 
-    dimRed.fit(training)
-
-    training = dimRed.transform(training)
-    testing = dimRed.transform(testing)
-
-    # Classify (predict)
-    classifier.fit(training, training_lbl)
-
-    # Result
-    return classifier.predict(testing)
-
-
-def calculate_scores(real, predicted):
-    f1_score = sklearn.metrics.f1_score(real, predicted)
-    precision = sklearn.metrics.precision_score(real, predicted)
-    recall = sklearn.metrics.recall_score(real, predicted)
-    mse = sklearn.metrics.mean_squared_error(real, predicted)
-    roc = sklearn.metrics.roc_curve(real, predicted)
-
-    print({
-        "f1": f1_score,
-        "precision": precision,
-        "recall": recall,
-        "mse": mse,
-        "roc": roc,
-    })
-
-
-for i, (train_indices, test_indices) in enumerate(kf.split(training_np)):
-    print(f"Fold: {i}")
-
-    training = training_np[train_indices]
-    training_lbl = training_labels[train_indices]
-
-    testing = training_np[test_indices]
-    testing_lbl = training_labels[test_indices]
-
-    scaler = StandardScaler()
-    pca = PCA(n_components=0.85)
-    logisticRegr = LogisticRegression()
-
-    predicted = everything(
-        training=training,
-        training_lbl=training_lbl,
-        testing=testing,
-        testing_lbl=testing_lbl,
-        scaler=scaler,
-        dimRed=pca,
-        classifier=logisticRegr,
-    )
-
-    calculate_scores(testing_lbl, predicted)
-
-    sklearn.metrics.RocCurveDisplay.from_predictions(testing_lbl, predicted)
-    plt.show()
-
-"""
-training = training_np[train_indices]
-training_lbl = training_labels[train_indices]
-
-testing = training_np[test_indices]
-testing_lbl = training_labels[test_indices]
-
-# Reduce dimension
-scaler = StandardScaler()
-scaler.fit(training)
-
-training = scaler.transform(training)
-testing = scaler.transform(testing)
-
-pca = PCA(n_components=0.85)
-pca.fit(training)
-
-training = pca.transform(training)
-testing = pca.transform(testing)
-
-# Classify (predict)
-logisticRegr = LogisticRegression()
-logisticRegr.fit(training, training_lbl)
-
-# Result
-x = logisticRegr.score(testing, testing_lbl)
-print(x)
-"""
+# Check for overfitting by comparing it with the prediction over the training data
+print(color_green(">> Checking overfitting"))
+predicted_train = trainer.fit_and_predict(grid_search, over_data=trainer.X_train)
+print_pretty_result(trainer.calculate_scores(predicted_train, trainer.y_train))  # Check for overfitting in the training data

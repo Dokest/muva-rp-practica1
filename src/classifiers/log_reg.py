@@ -2,7 +2,9 @@ from sklearn.linear_model import LogisticRegression
 
 
 def log_reg_classifier():
-    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression"""
+    """
+    Docs: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression
+    """
     return {
         "classifier": [LogisticRegression()],
         "classifier__fit_intercept": [True, False],
