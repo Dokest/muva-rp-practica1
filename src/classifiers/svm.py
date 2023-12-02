@@ -1,9 +1,8 @@
 from sklearn.svm import SVC
 
-from src.utils import stepped_values
-
 
 def svm_classifier():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"""
     return {
         "classifier": [SVC()],
         "classifier__C": [8.5],  # stepped_values(8.4, 8.5, 0.01),

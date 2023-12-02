@@ -1,10 +1,9 @@
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.svm import SVC
 
-from src.utils import stepped_values
-
 
 def adaboost_classifier():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier"""
     return {
         "classifier": [AdaBoostClassifier()],
         "classifier__estimator": [SVC(C=2, degree=2, random_state=1)],

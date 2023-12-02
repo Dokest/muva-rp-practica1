@@ -1,10 +1,10 @@
 from sklearn.linear_model import SGDClassifier
-from sklearn.pipeline import Pipeline
 
-from src.utils import stepped_values
+from src.utils.utils import stepped_values
 
 
 def classifier_sgd():
+    """Docs: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier"""
     return {
         "classifier": [SGDClassifier()],
         "classifier__loss": ["hinge", "log_loss", "modified_huber", "squared_hinge", "perceptron", "squared_error",

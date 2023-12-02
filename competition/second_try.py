@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.svm import SVC
 
 from definitions import ROOT_DIR
-from src.Trainer import Trainer
+from src.utils.Trainer import Trainer
 
 # Entrenar con todos los datos
 training_paths = [

@@ -4,14 +4,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from src.classifiers.svm import svm_classifier
-from src.classifiers.adaboost import adaboost_classifier
-from src.classifiers.random_forest import random_forest_classifier
-from src.permute import generate_param_grid
-from src.training_setup import init_trainer_for_training
-from src.classifiers.log_reg import log_reg_classifier
-from src.transformers.PCA import pca_transformer
-from src.transformers.PolynomialFeatures import polynomial_features_transformer, \
-    polynomial_features_with_pca_transformer
+from src.utils.permute import generate_param_grid
+from src.utils.training_setup import init_trainer_for_training
 from src.transformers.Standard_MinMax import minmax_transformer
 
 # Dummy pipeline -> No tocar
