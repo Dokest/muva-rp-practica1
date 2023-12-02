@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-from src.training_setup import init_trainer_for_training
+from src.utils.training_setup import init_trainer_for_training
 
 # Init training and start the prediction
 trainer = init_trainer_for_training()
