@@ -52,5 +52,4 @@ pipeline = Pipeline([
 predicted = trainer.fit_and_predict(pipeline, test_dataframe_complete.to_numpy())
 
 # Pasarlo a txt
-# predicted_str = '\n'.join(str(x) for x in predicted)
 np.savetxt("Competicion1.txt", predicted, fmt="%i", delimiter=",")

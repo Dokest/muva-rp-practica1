@@ -27,6 +27,7 @@ def save_model(model, name: str, directory="./output/"):
     """
     Stores the trained model into a .pkl file at the specified location.
     """
+    os.makedirs(directory, exist_ok=True)
     with open(os.path.join(directory, name), 'wb') as archivo:
         pickle.dump(model, archivo)
 

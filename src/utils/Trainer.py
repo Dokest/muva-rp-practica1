@@ -31,7 +31,7 @@ class Trainer:
         return self
 
     def fit_and_predict(self, pipeline: Pipeline, over_data: np.ndarray | None = None) -> np.ndarray:
-        pipeline.fit(self.X_train, self.y_train)
+        pipeline = pipeline.fit(self.X_train, self.y_train)
 
         return pipeline.predict(over_data if over_data is not None else self.X_test)
 
