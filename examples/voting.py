@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+from src.utils.prettify_result import print_pretty_result
 from src.utils.training_setup import init_trainer_for_training
 
 # Init training and start the prediction
@@ -31,4 +32,4 @@ predicted = trainer.fit_and_predict(Pipeline([
 ]))
 
 # Print the scores
-print(trainer.calculate_scores(predicted))
+print_pretty_result(trainer.calculate_scores(predicted))
