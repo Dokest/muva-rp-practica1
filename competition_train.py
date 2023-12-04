@@ -9,6 +9,13 @@ from src.utils.Trainer import Trainer
 from src.utils.utils import save_model
 
 
+"""
+This file is used to train the model. After training, the model is saved into "output_path.pkl"
+"""
+
+output_model_path = "competition_model.pkl"
+output_model_dir = "./output/"
+
 training_paths = [
     os.path.join(ROOT_DIR, "training_data/traintab01.csv"),
     os.path.join(ROOT_DIR, "training_data/traintab02.csv"),
@@ -37,4 +44,4 @@ pipeline = Pipeline([
 pipeline = pipeline.fit(trainer.X_train, trainer.y_train)
 
 # Store it in the file system as a Pickle
-save_model(pipeline, "competition_model.pkl")
+save_model(pipeline, output_model_path, output_model_dir)

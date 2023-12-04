@@ -23,7 +23,7 @@ def stepped_values(min_value: float, max_value: float, step: float) -> [float]:
     return all_values
 
 
-def save_model(model, name: str, directory="./output/"):
+def save_model(model, name: str, directory: str):
     """
     Stores the trained model into a .pkl file at the specified location.
     """
@@ -34,7 +34,7 @@ def save_model(model, name: str, directory="./output/"):
     print(f"Model saved at '{os.path.join(directory, name)}'")
 
 
-def load_model(name: str, directory: str = "./output"):
+def load_model(name: str, directory: str):
     """
     Loads the model from a .pkl file and returns it.
     """

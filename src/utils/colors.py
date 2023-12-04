@@ -15,3 +15,7 @@ class TColor:
 
 def color_green(text: str) -> str:
     return f"{TColor.OKGREEN}{text}{TColor.ENDC}"
+
+
+def color_red(text: str) -> str:
+    return f"{TColor.FAIL}{text}{TColor.ENDC}"
